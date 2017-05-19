@@ -19,6 +19,21 @@ var requestComplete = function(){
   var pokemon = JSON.parse(jsonString);
 
   console.log(pokemon)
+  populatePokemon(pokemon)
 }
+
+var populatePokemon = function(pokemon){
+  var div = document.getElementById('pokemon-container')
+  var imgDiv = document.createElement('div')
+  var heading = document.createElement('h1')
+  var frontImg = document.createElement('img')
+  capitialisedName = pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1);
+  heading.innerText = capitialisedName;
+  frontImg.src = pokemon.sprites.front_default;
+
+  imgDiv.appendChild(frontImg)
+  div.appendChild(heading)
+  div.appendChild(imgDiv)
+  };
 
 window.addEventListener('load', app)
