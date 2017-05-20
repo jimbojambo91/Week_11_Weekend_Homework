@@ -44,12 +44,20 @@ var populatePokemon = function(pokemon){
   var shinyBackImg = document.createElement('img')
   statsDiv.id = "stats-container"
   imgDiv.id = "sprite-container"
-  capitialisedName = pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1);
+  capitialisedName = capitialiser(pokemon.name);
   heading.innerText = capitialisedName;
   statsHeading.innerText = "Stats";
   statsName.innerText = "Name: " + capitialisedName;
-  statsType.innerText = "Type: " + pokemon.types[1].type.name;
-  statsType2.innerText = "Secondary Type: " + pokemon.types[0].type.name;
+    if(pokemon.types[1] === undefined){
+      statsType.innerText = "Type: " + capitialiser(pokemon.types[0].type.name);
+    } else {
+      statsType.innerText = "Type: " + capitialiser(pokemon.types[1].type.name);
+      statsType2.innerText = "Secondary Type: " + capitialiser(pokemon.types[0].type.name);
+    }
+  statsPokedexNum.innerText = "Pokedex Num: " + pokemon.id
+  statsHeight.innerText = "Height: " + pokemon.height
+  statsWeight.innerText = "Weight: " + pokemon.weight
+  
   spriteHeading.innerText = "Sprites";
   normalSpriteHeading.innerText = "Normal";
   shinySpriteHeading.innerText = "Shiny";
@@ -69,9 +77,20 @@ var populatePokemon = function(pokemon){
   statsDiv.appendChild(statsName);
   statsDiv.appendChild(statsType);
   statsDiv.appendChild(statsType2);
+  statsDiv.appendChild(statsPokedexNum);
+  statsDiv.appendChild(statsHeight);
+  statsDiv.appendChild(statsWeight);
   div.appendChild(heading);
   div.appendChild(statsDiv);
   div.appendChild(imgDiv);
+
+  // TODO change background color on certain elements depending on type
+  // document.body.style.backgroundColor = 'blue'
   };
+
+  var capitialiser = function(string){
+    capitialisdString = string.charAt(0).toUpperCase() + string.slice(1);
+    return capitialisdString;
+  }
 
 window.addEventListener('load', app)
