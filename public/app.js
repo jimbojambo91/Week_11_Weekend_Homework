@@ -78,6 +78,7 @@ var populatePokemon = function(pokemon){
   var baseStatsButton = document.createElement('button')
   var nextButton = document.getElementById("next-pokemon")
   var previousButton = document.getElementById("previous-pokemon")
+  var searchButton = document.getElementById("search-button")
   statsDiv.id = "stats-container"
   imgDiv.id = "sprite-container"
   capitialisedName = capitialiser(pokemon.name);
@@ -211,9 +212,15 @@ var populatePokemon = function(pokemon){
     }
     
     nextUrl = "http://pokeapi.co/api/v2/pokemon/" + nextNum;
-    div.removeChild(heading)
-    div.removeChild(statsDiv)
-    div.removeChild(imgDiv)  
+    if(heading !== undefined){
+      div.removeChild(heading)
+    }
+    if(statsDiv !== undefined){
+      div.removeChild(statsDiv) 
+    }
+    if(imgDiv !== undefined){
+      div.removeChild(imgDiv) 
+    }  
     makeRequest(nextUrl, requestComplete);
 
   }
@@ -226,16 +233,41 @@ var populatePokemon = function(pokemon){
     }
     
     nextUrl = "http://pokeapi.co/api/v2/pokemon/" + nextNum;
-    div.removeChild(heading)
-    div.removeChild(statsDiv)
-    div.removeChild(imgDiv)  
+    if(heading !== undefined){
+      div.removeChild(heading)
+    }
+    if(statsDiv !== undefined){
+      div.removeChild(statsDiv) 
+    }
+    if(imgDiv !== undefined){
+      div.removeChild(imgDiv) 
+    }  
     makeRequest(nextUrl, requestComplete);
+
+  }
+
+  var handleSearchButtonClick = function(){
+    
+    var input = document.getElementById("pokemon-search")
+    url = "http://pokeapi.co/api/v2/pokemon/" + input.value;
+    console.log(div);
+    if(heading !== undefined){
+      div.removeChild(heading)
+    }
+    if(statsDiv !== undefined){
+      div.removeChild(statsDiv) 
+    }
+    if(imgDiv !== undefined){
+      div.removeChild(imgDiv) 
+    }   
+    makeRequest(url, requestComplete);
 
   }
 
   baseStatsButton.addEventListener("click", handleStatsButtonClick);
   nextButton.addEventListener("click", handleNextButtonClick);
   previousButton.addEventListener("click", handlePreviousButtonClick);
+  searchButton.addEventListener("click", handleSearchButtonClick);
 
 
 
