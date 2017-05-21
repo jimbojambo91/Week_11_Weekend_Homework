@@ -23,6 +23,7 @@ var requestComplete = function(){
 }
 
 var populatePokemon = function(pokemon){
+  var baseStatsFlag = false;
 
   var div = document.getElementById('pokemon-container')
   var imgDiv = document.createElement('div')
@@ -42,6 +43,7 @@ var populatePokemon = function(pokemon){
   var backImg = document.createElement('img')
   var shinyFrontImg = document.createElement('img')
   var shinyBackImg = document.createElement('img')
+  var baseStatsButton = document.createElement('button')
   statsDiv.id = "stats-container"
   imgDiv.id = "sprite-container"
   capitialisedName = capitialiser(pokemon.name);
@@ -65,6 +67,7 @@ var populatePokemon = function(pokemon){
   backImg.src = pokemon.sprites.back_default;
   shinyFrontImg.src = pokemon.sprites.front_shiny;
   shinyBackImg.src = pokemon.sprites.back_shiny;
+  baseStatsButton.innerText = "Show Base Stats"
 
   imgDiv.appendChild(spriteHeading);
   imgDiv.appendChild(normalSpriteHeading);
@@ -80,9 +83,48 @@ var populatePokemon = function(pokemon){
   statsDiv.appendChild(statsPokedexNum);
   statsDiv.appendChild(statsHeight);
   statsDiv.appendChild(statsWeight);
+  statsDiv.appendChild(baseStatsButton);
   div.appendChild(heading);
   div.appendChild(statsDiv);
   div.appendChild(imgDiv);
+
+  var handleButtonClick = function(event){
+    if(baseStatsFlag === false){
+      var baseStatsTable = document.createElement('table');
+      var firstRow = document.createElement('tr');
+      var firstColumn = document.createElement('td');
+      var secondColumn = document.createElement('td');
+      var secondRow = document.createElement('tr');
+      var secondFirstColumn = document.createElement('td');
+      var secondSecondColumn = document.createElement('td');
+
+      baseStatsTable.id = "stat-table";
+      firstColumn.innerText = ("Stat Name");
+      secondColumn.innerText = ("Value");
+      secondFirstColumn.innerText = capitialiser(pokemon.stats[0].stat.name)
+      secondSecondColumn.innerText = pokemon.stats[0].base_stat
+      firstRow.appendChild(firstColumn);
+      firstRow.appendChild(secondColumn);
+      secondRow.appendChild(secondFirstColumn);
+      secondRow.appendChild(secondSecondColumn);
+      baseStatsTable.appendChild(firstRow);
+      baseStatsTable.appendChild(secondRow);
+      statsDiv.appendChild(baseStatsTable);
+      baseStatsButton.innerText = "Hide"
+      baseStatsFlag = true;
+    } else {
+      var statTable = document.getElementById("stat-table");
+      statsDiv.removeChild(statTable)
+      baseStatsButton.innerText = "Show Base Stats"
+      baseStatsFlag = false;
+    }
+    
+
+    }
+
+  baseStatsButton.addEventListener("click", handleButtonClick);
+
+
 
   // TODO change background color on certain elements depending on type
   // document.body.style.backgroundColor = 'blue'
