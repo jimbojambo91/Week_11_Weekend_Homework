@@ -97,18 +97,58 @@ var populatePokemon = function(pokemon){
       var secondRow = document.createElement('tr');
       var secondFirstColumn = document.createElement('td');
       var secondSecondColumn = document.createElement('td');
+      var thirdRow = document.createElement('tr');
+      var thirdFirstColumn = document.createElement('td');
+      var thirdSecondColumn = document.createElement('td');
+      var fourthRow = document.createElement('tr');
+      var fourthFirstColumn = document.createElement('td');
+      var fourthSecondColumn = document.createElement('td');
+      var fifthRow = document.createElement('tr');
+      var fifthFirstColumn = document.createElement('td');
+      var fifthSecondColumn = document.createElement('td');
+      var sixthRow = document.createElement('tr');
+      var sixthFirstColumn = document.createElement('td');
+      var sixthSecondColumn = document.createElement('td');
+      var seventhRow = document.createElement('tr');
+      var seventhFirstColumn = document.createElement('td');
+      var seventhSecondColumn = document.createElement('td');
 
       baseStatsTable.id = "stat-table";
       firstColumn.innerText = ("Stat Name");
       secondColumn.innerText = ("Value");
       secondFirstColumn.innerText = capitialiser(pokemon.stats[0].stat.name)
       secondSecondColumn.innerText = pokemon.stats[0].base_stat
+      thirdFirstColumn.innerText = capitialiser(pokemon.stats[1].stat.name)
+      thirdSecondColumn.innerText = pokemon.stats[1].base_stat
+      fourthFirstColumn.innerText = capitialiser(pokemon.stats[2].stat.name)
+      fourthSecondColumn.innerText = pokemon.stats[2].base_stat
+      fifthFirstColumn.innerText = capitialiser(pokemon.stats[3].stat.name)
+      fifthSecondColumn.innerText = pokemon.stats[3].base_stat
+      sixthFirstColumn.innerText = capitialiser(pokemon.stats[4].stat.name)
+      sixthSecondColumn.innerText = pokemon.stats[4].base_stat
+      seventhFirstColumn.innerText = capitialiser(pokemon.stats[5].stat.name)
+      seventhSecondColumn.innerText = pokemon.stats[5].base_stat
       firstRow.appendChild(firstColumn);
       firstRow.appendChild(secondColumn);
       secondRow.appendChild(secondFirstColumn);
       secondRow.appendChild(secondSecondColumn);
+      thirdRow.appendChild(thirdFirstColumn);
+      thirdRow.appendChild(thirdSecondColumn);
+      fourthRow.appendChild(fourthFirstColumn);
+      fourthRow.appendChild(fourthSecondColumn);
+      fifthRow.appendChild(fifthFirstColumn);
+      fifthRow.appendChild(fifthSecondColumn);
+      sixthRow.appendChild(sixthFirstColumn);
+      sixthRow.appendChild(sixthSecondColumn);
+      seventhRow.appendChild(seventhFirstColumn);
+      seventhRow.appendChild(seventhSecondColumn);
       baseStatsTable.appendChild(firstRow);
       baseStatsTable.appendChild(secondRow);
+      baseStatsTable.appendChild(thirdRow);
+      baseStatsTable.appendChild(fourthRow);
+      baseStatsTable.appendChild(fifthRow);
+      baseStatsTable.appendChild(sixthRow);
+      baseStatsTable.appendChild(seventhRow);
       statsDiv.appendChild(baseStatsTable);
       baseStatsButton.innerText = "Hide"
       baseStatsFlag = true;
