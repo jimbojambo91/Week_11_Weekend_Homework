@@ -22,9 +22,41 @@ var requestComplete = function(){
   populatePokemon(pokemon)
 }
 
-var populatePokemon = function(pokemon){
-  var baseStatsFlag = false;
+// var populateEvolution = function(pokemonEvolChain){
+//   console.log(pokemonEvolChain)
+//   var div = document.getElementById("pokemon-container")
+//   var evolutionDiv = document.createElement("div")
+//   evolutionDiv.id = "evolution-container";
+//   div.appendChild(evolutionDiv);
+//   // if(pokemonEvolChain. )
 
+
+// }
+
+// var evolutionChainRequestComplete = function(){
+//   //THIS REFERS TO XMLHTTPREQUEST JUST NOW
+//   if(this.status !== 200) return;
+
+//   var jsonString = this.responseText;
+//   var pokemonEvolChain = JSON.parse(jsonString);
+
+//   populateEvolution(pokemonEvolChain);
+// }
+
+// var evolutionRequestComplete = function(){
+//   //THIS REFERS TO XMLHTTPREQUEST JUST NOW
+//   if(this.status !== 200) return;
+
+//   var jsonString = this.responseText;
+//   var pokemonEvol = JSON.parse(jsonString);
+
+//   makeRequest(pokemonEvol.evolution_chain.url, evolutionChainRequestComplete)
+// }
+
+
+var populatePokemon = function(pokemon){
+
+  var baseStatsFlag = false;
   var div = document.getElementById('pokemon-container')
   var imgDiv = document.createElement('div')
   var statsDiv = document.createElement('div')
@@ -44,6 +76,8 @@ var populatePokemon = function(pokemon){
   var shinyFrontImg = document.createElement('img')
   var shinyBackImg = document.createElement('img')
   var baseStatsButton = document.createElement('button')
+  var nextButton = document.getElementById("next-pokemon")
+  var previousButton = document.getElementById("previous-pokemon")
   statsDiv.id = "stats-container"
   imgDiv.id = "sprite-container"
   capitialisedName = capitialiser(pokemon.name);
@@ -88,7 +122,14 @@ var populatePokemon = function(pokemon){
   div.appendChild(statsDiv);
   div.appendChild(imgDiv);
 
-  var handleButtonClick = function(event){
+  
+
+
+
+  // var evolutionUrl = "http://pokeapi.co/api/v2/pokemon-species/" + pokemon.id + "/"
+  // makeRequest(evolutionUrl, evolutionRequestComplete)
+
+  var handleStatsButtonClick = function(event){
     if(baseStatsFlag === false){
       var baseStatsTable = document.createElement('table');
       var firstRow = document.createElement('tr');
@@ -162,7 +203,39 @@ var populatePokemon = function(pokemon){
 
     }
 
-  baseStatsButton.addEventListener("click", handleButtonClick);
+  var handleNextButtonClick = function(){
+    if(pokemon.id === 721 ){
+      nextNum = 1;
+    } else {
+      nextNum = pokemon.id+1
+    }
+    
+    nextUrl = "http://pokeapi.co/api/v2/pokemon/" + nextNum;
+    div.removeChild(heading)
+    div.removeChild(statsDiv)
+    div.removeChild(imgDiv)  
+    makeRequest(nextUrl, requestComplete);
+
+  }
+
+  var handlePreviousButtonClick = function(){
+    if(pokemon.id === 1 ){
+      nextNum = 721;
+    } else {
+      nextNum = pokemon.id-1
+    }
+    
+    nextUrl = "http://pokeapi.co/api/v2/pokemon/" + nextNum;
+    div.removeChild(heading)
+    div.removeChild(statsDiv)
+    div.removeChild(imgDiv)  
+    makeRequest(nextUrl, requestComplete);
+
+  }
+
+  baseStatsButton.addEventListener("click", handleStatsButtonClick);
+  nextButton.addEventListener("click", handleNextButtonClick);
+  previousButton.addEventListener("click", handlePreviousButtonClick);
 
 
 
